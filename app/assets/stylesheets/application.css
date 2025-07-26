@@ -1,0 +1,88 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+ ul {
+    font-family: 'Arial';
+    list-style-type: none;
+    border-radius: 16px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    margin: 20px auto 30px auto;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: #111;
+  }
+
+  .about {
+    background-color: #0dade2;
+  }
+
+
+
+.form-button,
+.center-form input[type="submit"],
+.center-form input[type="button"],
+.center-form button {
+  margin-top: 16px;
+  padding: 10px 24px;
+  font-size: 1em;
+  border-radius: 4px;
+  background-color: #0dade2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.form-button:hover,
+.center-form input[type="submit"]:hover {
+  background-color: #0978a0;
+}
+
+body {
+  background-color: #e6f2ff; /* light blue */
+}
+
+.navbar-right {
+  float: right;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: 20px;      /* Increase space from About */
+  margin-right: 15px;     /* Add space from the edge */
+  padding-top: 12px;       /* Adjust vertical alignment */
+  padding-bottom: 0px;
+}
+
+.navbar-user {
+  color: #c1bdbd;
+  margin-right: 10px;
+}
+
+.nav-form-button {
+  background-color: #0dade2;
+  color: white;
+}

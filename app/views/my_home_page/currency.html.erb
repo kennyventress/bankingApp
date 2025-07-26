@@ -1,0 +1,67 @@
+<ul>
+    <li><a href="/my_home_page/home">Home</a></li>
+    <li><a href="/my_home_page/accounts">Accounts</a></li>
+    <li><a href="/my_home_page/transfer">Transfer</a></li>
+    <li><a href="/my_home_page/transactions">Transactions</a></li>
+    <li><a href="/my_home_page/currency">Currency</a></li>
+    <li><a href="/my_home_page/contact">Contact</a></li>
+    <li style="float:right">
+      <a class="about" href="/my_home_page/about">About</a> 
+      </li>
+    
+
+    <% if session[:user_id] %>
+    <% user = User.find_by(id: session[:user_id]) %>
+    <li class="navbar-right">
+        <span class="navbar-user">
+        Logged in as <%= user&.username || "Unknown" %>
+        </span>
+        <%= button_to "Log Out", logout_path, method: :post, class: "nav-form-button" %>
+    </li>
+    <% end %>
+      
+</ul>
+<style>
+p {text-align: center; font-family: 'Arial';}
+</style>
+
+
+<p>Find me in app/views/my_home_page/currency.html.erb</p>
+
+<div style="max-width: 400px; margin: 40px auto; padding: 24px; background: #f8faff; border-radius: 10px; box-shadow: 0 2px 8px #e0e0e0; font-family: 'Arial'; text-align: center;">
+  <h2 style="text-align:center;">Currency Converter</h2>
+  <%= form_with url: my_home_page_currency_path, method: :get, local: true do %>
+    <% currencies = [
+  "USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF", "CNY", "INR", "BRL", "RUB", "KRW", "SGD", "MXN", "ZAR", "SEK", "NZD", "HKD", "TRY", "SAR" ] %>
+    <div style="margin-bottom: 16px;">
+      <label>From:</label>
+      <%= select_tag :from_currency, options_for_select(currencies, params[:from_currency] || "USD"), class: "form-control" %>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <label>To:</label>
+      <%= select_tag :to_currency, options_for_select(currencies, params[:to_currency] || "EUR"), class: "form-control" %>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <label>Amount:</label>
+      <%= number_field_tag :amount, params[:amount] || 1, step: 0.01, class: "form-control" %>
+    </div>
+    <div style="text-align:center;">
+      <%= submit_tag "Convert", class: "form-button" %>
+    </div>
+  <% end %>
+
+
+
+
+
+  <% if @converted_amount.present? %>
+  <div style="margin-top: 24px; text-align:center; font-size: 1.2em;">
+    <strong>
+      <%= params[:amount] %> <%= params[:from_currency] %>
+      =
+      <%= @converted_amount %> <%= params[:to_currency] %>
+    </strong>
+  </div>
+<% end %>
+</div>
+</div>

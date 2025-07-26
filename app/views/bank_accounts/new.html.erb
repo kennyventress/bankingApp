@@ -1,0 +1,91 @@
+<ul>
+    <li><a href="/my_home_page/home">Home</a></li>
+    <li><a href="/my_home_page/accounts">Accounts</a></li>
+    <li><a href="/my_home_page/transfer">Transfer</a></li>
+    <li><a href="/my_home_page/transactions">Transactions</a></li>
+    <li><a href="/my_home_page/currency">Currency</a></li>
+    <li><a href="/my_home_page/contact">Contact</a></li>
+    <li style="float:right">
+      <a class="about" href="/my_home_page/about">About</a> 
+      </li>
+    
+
+    <% if session[:user_id] %>
+    <% user = User.find_by(id: session[:user_id]) %>
+    <li class="navbar-right">
+        <span class="navbar-user">
+        Logged in as <%= user&.username || "Unknown" %>
+        </span>
+        <%= button_to "Log Out", logout_path, method: :post, class: "nav-form-button" %>
+    </li>
+    <% end %>
+      
+</ul>
+
+<style>
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+</style>
+
+
+<div style="text-align: center;">
+
+  <p> Please add a bank account </p>
+
+  <!-- Submission form to show ALL accounts -->
+  <%= form_for @account, url: bank_accounts_path do |f| %>
+    <div>
+      <%= f.label :name, "Account Name" %>
+      <%= f.text_field :name %>
+    </div>
+    <br>
+    <div>
+      <%= f.label :routing_number, "Routing Number" %>
+      <%= f.text_field :routing_number %>
+    </div>
+    <br>
+    <div>
+      <%= f.label :account_number, "Account Number" %>
+      <%= f.text_field :account_number %>
+    </div>
+    <br>
+    <div>
+      <%= f.label :balance, "Initial Balance" %>
+      <%= f.number_field :balance, step: 0.01 %>
+    </div>
+    <br>
+    <div>
+      <%= f.submit "Add Account", class: "form-button" %>
+    </div>
+  <% end %>
+
+  <!-- grid for all accounts -->
+  <% if @bank_accounts.any? %>
+    <div style= "text-align: center;">
+    <h2>Your Bank Accounts</h2>
+    <table border="10" style="width: 100%; text-align: center;">
+      <thead>
+        <tr>
+          <th>Account Name</th>
+          <th>Routing Number</th>
+          <th>Account Number</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bank_accounts.each do |account| %>
+          <tr>
+            <td><%= account.name %></td>
+            <td><%= account.routing_number %></td>
+            <td><%= account.account_number %></td>
+            <td><%= number_to_currency(account.balance) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <br>
+    <p>You currently have no bank accounts.</p>
+  <% end %>
+</div>

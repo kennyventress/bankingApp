@@ -1,0 +1,44 @@
+<ul>
+    <li><a href="/my_home_page/home">Home</a></li>
+    <li><a href="/my_home_page/accounts">Accounts</a></li>
+    <li><a href="/my_home_page/transfer">Transfer</a></li>
+    <li><a href="/my_home_page/transactions">Transactions</a></li>
+    <li><a href="/my_home_page/currency">Currency</a></li>
+    <li><a href="/my_home_page/contact">Contact</a></li>
+    <li style="float:right">
+      <a class="about" href="/my_home_page/about">About</a> 
+      </li>
+    
+
+    <% if session[:user_id] %>
+    <% user = User.find_by(id: session[:user_id]) %>
+    <li class="navbar-right">
+        <span class="navbar-user">
+        Logged in as <%= user&.username || "Unknown" %>
+        </span>
+        <%= button_to "Log Out", logout_path, method: :post, class: "nav-form-button" %>
+    </li>
+    <% end %>
+      
+</ul>
+
+<style>
+h1 {text-align: left;}
+p {text-align: center;}
+div {text-align: center;}
+</style>
+
+<p>Fill in the form below to create a new user account.</p>
+
+<div class= "center-form">
+<%= form_for @user do |f| %>
+    <%= f.label :username %>
+    <%= f.text_field :username %><br>
+    <br>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <br>
+    <%= f.submit "Create User", class: "form-button" %>
+<% end %>
+<p>Already have an account? <%= link_to 'Log In', '/login' %></
+</div>

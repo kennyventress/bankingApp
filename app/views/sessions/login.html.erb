@@ -1,0 +1,50 @@
+<ul>
+    <li><a href="/my_home_page/home">Home</a></li>
+    <li><a href="/my_home_page/accounts">Accounts</a></li>
+    <li><a href="/my_home_page/transfer">Transfer</a></li>
+    <li><a href="/my_home_page/transactions">Transactions</a></li>
+    <li><a href="/my_home_page/currency">Currency</a></li>
+    <li><a href="/my_home_page/contact">Contact</a></li>
+    <li style="float:right">
+      <a class="about" href="/my_home_page/about">About</a> 
+      </li>
+    
+
+    <% if session[:user_id] %>
+    <% user = User.find_by(id: session[:user_id]) %>
+    <li class="navbar-right">
+        <span class="navbar-user">
+        Logged in as <%= user&.username || "Unknown" %>
+        </span>
+        <%= button_to "Log Out", logout_path, method: :post, class: "nav-form-button" %>
+    </li>
+    <% end %>
+      
+</ul>
+
+
+<style>
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+</style>
+
+
+<% if session[:user_id].blank? %>
+
+<div>
+    <h2>Log In</h2>
+    <%= form_tag '/login' do%>
+        Username: <%= text_field_tag :username %><br>
+        <br>
+        Password: <%= password_field_tag :password %><br>
+        <%= submit_tag 'Enter' , class: "form-button"%>
+</div>
+    <% end %>
+    <p><%= link_to 'Create User', new_user_path %></p>
+</div>
+
+<% else %>
+  <h1>Welcome!</h1>
+  <p>You are already logged in.</p>
+<% end %> 

@@ -1,0 +1,43 @@
+<ul>
+    <li><a href="/my_home_page/home">Home</a></li>
+    <li><a href="/my_home_page/accounts">Accounts</a></li>
+    <li><a href="/my_home_page/transfer">Transfer</a></li>
+    <li><a href="/my_home_page/transactions">Transactions</a></li>
+    <li><a href="/my_home_page/currency">Currency</a></li>
+    <li><a href="/my_home_page/contact">Contact</a></li>
+    <li style="float:right">
+      <a class="about" href="/my_home_page/about">About</a> 
+      </li>
+    
+
+    <% if session[:user_id] %>
+    <% user = User.find_by(id: session[:user_id]) %>
+    <li class="navbar-right">
+        <span class="navbar-user">
+        Logged in as <%= user&.username || "Unknown" %>
+        </span>
+        <%= button_to "Log Out", logout_path, method: :post, class: "nav-form-button" %>
+    </li>
+    <% end %>
+      
+</ul>
+<style>
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;, font-family: 'Arial';}
+</style>
+
+<p>Find me in app/views/my_home_page/accounts.html.erb</p>
+
+<div>
+<% (@bank_accounts || []).each do |account| %>
+    <p>Account Number: <%= account.account_number %></p>
+    <p>Balance: <%= number_to_currency(account.balance) %></p>
+  <% end %>
+
+<%= link_to "Add Bank Account", new_bank_account_path %><br>
+
+<br>
+
+<%= link_to "View Bank Accounts", bank_accounts_path %>
+</div>
