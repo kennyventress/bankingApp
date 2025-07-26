@@ -2,6 +2,7 @@
 
 ## Overview
 This project is a simple banking website that provides users with the ability to manage multiple bank accounts, sign up for new accounts, and log in to access their profiles. Additionally, it includes a currency converter tool that users can access from their profiles.
+[View My Presentation on SlideShare](https://www.slideshare.net/slideshow/ruby-banking-app-for-senior-year-project-in-principles-of-programming-languages/281983836)
 
 ## Features
 - User authentication (username and password)
